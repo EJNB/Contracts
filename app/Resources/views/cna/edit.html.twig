@@ -1,0 +1,98 @@
+{#{% form_theme form 'form/fields.html.twig' %}#}
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Editar CNA: <small style="display: inline">{{ cNA.name }}</small></h1>
+
+    <div class="container-fluid">
+        <div class="row">
+            {{ form_start(edit_form) }}
+
+            <div class="col-md-5">
+                <div class="form-horizontal">
+
+                    <!--Name field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.name,'Nombre', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.name) }}
+                            {{ form_widget(edit_form.name) }}
+                        </div>
+                    </div>
+
+                    <!--Address field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.address,'Dirección', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.address) }}
+                            {{ form_widget(edit_form.address) }}
+                        </div>
+                    </div>
+
+                    <!-- social Object field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.socialObject,'Objeto social', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.socialObject) }}
+                            {{ form_widget(edit_form.socialObject) }}
+                        </div>
+                    </div>
+
+                    <!--CUC account field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.cucAccount,'Cuenta en CUC', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.cucAccount) }}
+                            {{ form_widget(edit_form.cucAccount) }}
+                        </div>
+                    </div>
+
+                    <!--CUP account field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.cupAccount,'Cuenta en CUP', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.cupAccount) }}
+                            {{ form_widget(edit_form.cupAccount) }}
+                        </div>
+                    </div>
+
+                    <label class="col-sm-5"style="margin-right: 13px"></label>
+                    <div class="form-group" style="margin-top: 6px; margin-left: 10px; padding-left: 10px">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <a href="{{ path('cna_index') }}" class="btn btn-default">Regresar al listado</a>
+                    </div>
+
+                </div><!--/. form-horizontal-->
+            </div><!--End .col-md-5-->
+
+            <div class="col-md-3">
+                <div class="form-horizontal">
+                    <h3 class="page-header" style="margin-top: 10px">Emails</h3>
+                    <ul class="emails" data-prototype="{{ form_widget(edit_form.emails.vars.prototype.email)|e }}">
+                        {#iterate over each existing email and render its only field: name#}
+                        {% for email in edit_form.emails %}
+                            <li>
+                                <div class="form-group">
+                                    {{ form_widget(email.email) }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div><!--/. form-horizontal-->
+            </div><!--End .col-md-3-->
+
+            <div class="col-md-3">
+                <div class="form-horizontal">
+                    <h3 class="page-header" style="margin-top: 10px">Telefonos</h3>
+                    <ul class="phones" data-prototype="{{ form_widget(edit_form.phones.vars.prototype.phoneNumber)|e }}">
+                        {% for phone in edit_form.phones %}
+                            <li>{{ form_widget(phone.phoneNumber) }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {{ form_end(edit_form) }}
+        </div>
+    </div><!--end .container-fluid-->
+
+{% endblock %}

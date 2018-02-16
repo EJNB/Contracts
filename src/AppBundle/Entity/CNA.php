@@ -1,0 +1,113 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User111: javier
+ * Date: 07/12/2017
+ * Time: 7:36
+ */
+
+namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * cna
+ *
+ * @ORM\Table(name="cna")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CNARepository")
+ */
+class CNA extends Supplier
+{
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="reeup_code", type="string")
+     */
+    private $codReuup;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nit_code", type="integer")
+     */
+    private $codNit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="social_object", type="string")
+     */
+    protected $socialObject;
+
+    /**
+     * Set socialObject
+     *
+     * @param string $socialObject
+     *
+     * @return CNA
+     */
+    public function setSocialObject($socialObject)
+    {
+        $this->socialObject = $socialObject;
+
+        return $this;
+    }
+
+    /**
+     * Get socialObject
+     *
+     * @return string
+     */
+    public function getSocialObject()
+    {
+        return $this->socialObject;
+    }
+
+    /**
+     * Set codReuup
+     *
+     * @param integer $codReuup
+     *
+     * @return CNA
+     */
+    public function setCodReuup($codReuup)
+    {
+        $this->codReuup = $codReuup;
+
+        return $this;
+    }
+
+    /**
+     * Get codReuup
+     *
+     * @return integer
+     */
+    public function getCodReuup()
+    {
+        return $this->codReuup;
+    }
+
+    /**
+     * Set codNit
+     *
+     * @param integer $codNit
+     *
+     * @return CNA
+     */
+    public function setCodNit($codNit)
+    {
+        $this->codNit = $codNit;
+
+        return $this;
+    }
+
+    /**
+     * Get codNit
+     *
+     * @return integer
+     */
+    public function getCodNit()
+    {
+        return $this->codNit;
+    }
+}

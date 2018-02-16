@@ -1,0 +1,39 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1>Licences list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Licencenumber</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for licence in licences %}
+            <tr>
+                <td><a href="{{ path('licence_show', { 'id': licence.id }) }}">{{ licence.id }}</a></td>
+                <td>{{ licence.licenceNumber }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('licence_show', { 'id': licence.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('licence_edit', { 'id': licence.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('licence_new') }}">Create a new licence</a>
+        </li>
+    </ul>
+{% endblock %}

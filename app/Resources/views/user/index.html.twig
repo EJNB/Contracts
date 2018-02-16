@@ -1,0 +1,81 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Usuarios</h1>
+
+    <table class="table table-responsive table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nombre y apellidos</th>
+                <th>Correo</th>
+                <th>Usuario</th>
+                <th>Cargo</th>
+                <th>Activo</th>
+                <th>Roles</th>
+                <th>Departamento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.occupation }}</td>
+                <td>{% if user.isActive %}
+                        <span class="label label-success">Si</span>
+                    {% else %}
+                        <span class="label label-danger">No</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role.name }}<br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {{ user.department }}
+                </td>
+                <td>
+                    {#<a href="{{ path('user_show', { 'id': user.id }) }}" data-toggle="tooltip" data-placement="top" title="Ver">#}
+                        {#<span class="glyphicon glyphicon-eye-open"></span>#}
+                    {#</a>#}
+                    <a href="javascript:void(0)"
+                       data-url="{{ path('user_change_password',{'id':user.id}) }}"
+                       data-toggle="modal"
+                       data-target="#modal-change-password"
+                       data-placement="top"
+                       title="Cambiar Contraseña"
+                       class="change_password link-tooltip"
+                    >
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="{{ path('user_edit', { 'id': user.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="javascript:void(0)"
+                       class="link-tooltip link-eliminar"
+                       description="{{ user.name }}"
+                       data-url="{{ path('user_delete',{ 'id':user.id }) }}"
+                       data-toggle="modal"
+                       data-target="#modal_delete"
+                       data-placement="top"
+                       title="Eliminar"
+                    >
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('user_new') }}" class="btn btn-primary">Agregar usuario</a>
+
+    {{ include('layouts/include/modals.html.twig') }}
+
+{% endblock %}

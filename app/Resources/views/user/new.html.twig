@@ -1,0 +1,119 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Registrar usuario</h1>
+
+    <div class="container-fluid">
+        <div class="row">
+            {{ form_start(form) }}
+
+            <div class="col-md-5">
+                <div class="form-horizontal">
+
+                    <!--Name field-->
+                    <div class="form-group">
+                        {{ form_label(form.name,'Nombre', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.name) }}
+                            {{ form_widget(form.name) }}
+                        </div>
+                    </div>
+
+                    <!--email field-->
+                    <div class="form-group">
+                        {{ form_label(form.email,'Correo', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email) }}
+                        </div>
+                    </div>
+
+                    <!--username field-->
+                    <div class="form-group">
+                        {{ form_label(form.username,'Usuario', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.username) }}
+                            {{ form_widget(form.username) }}
+                        </div>
+                    </div>
+
+                    <!--department field-->
+                    <div class="form-group">
+                        {{ form_label(form.department,'Departamento', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.department) }}
+                            {{ form_widget(form.department) }}
+                        </div>
+                    </div>
+
+                    <!--ocupation field-->
+                    <div class="form-group">
+                        {{ form_label(form.occupation,'Cargo', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.occupation) }}
+                            {{ form_widget(form.occupation) }}
+                        </div>
+                    </div>
+
+                    <!--password field-->
+                    <div class="form-group">
+                        {% if(form_errors(form.password.first)!=null) %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <strong>Error</strong> {{ form_errors(form.password.first) }}
+                            </div>
+                        {% else %}
+                            {{ form_errors(form.password.first,{'attr': {'class':'form-control'}}) }}
+                        {% endif %}
+                        {{ form_label(form.password.first,'Contraseña', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_widget(form.password.first,{'attr': {'class':'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <!--repeat password field-->
+                    <div class="form-group">
+                        {{ form_label(form.password.second,'Repita la contraseña', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_widget(form.password.second,{'attr': {'class':'form-control'}}) }}
+                        </div>
+                    </div>
+
+                </div><!--end .form-horizontal-->
+            </div><!--end .col-md-5-->
+
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="acuerdos_seguridadbundle_user[isActive]" {#class="col-sm-5 control-label"#}>Activo</label>
+                    <div class="switch {#col-sm-7#}">
+                        {{ form_widget(form.isActive) }}
+                        {{ form_label(form.isActive) }}
+                    </div>
+                    {{ form_errors(form.isActive) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.roles) }}
+                    {{ form_errors(form.roles) }}
+                    {{ form_widget(form.roles) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="margin-left: 8px" ></label>
+                        <div class="col-sm-5">
+                            <input type="submit" value="Guardar" class="btn btn-primary"/>
+                            <a href="{{ path('user_index') }}" class="btn btn-default">Regresar al listado</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div><!--end .row-->
+
+    </div><!--end .container-fluid-->
+
+{% endblock %}

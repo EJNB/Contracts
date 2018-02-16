@@ -1,0 +1,115 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Registrar Trabajador por cuenta propia</h1>
+
+    <div class="container-fluid">
+        <div class="row">
+        {{ form_start(form) }}
+
+            <div class="col-md-5">
+                <div class="form-horizontal">
+
+                    <!--Name field-->
+                    <div class="form-group">
+                        {{ form_label(form.name,'Nombre', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.name) }}
+                            {{ form_widget(form.name) }}
+                        </div>
+                    </div>
+
+                    <!--CI field-->
+                    <div class="form-group">
+                        {{ form_label(form.ci,'CI', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.ci) }}
+                            {{ form_widget(form.ci) }}
+                        </div>
+                    </div>
+
+                    <!--Address field-->
+                    <div class="form-group">
+                        {{ form_label(form.address,'Dirección', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.address) }}
+                            {{ form_widget(form.address) }}
+                        </div>
+                    </div>
+
+                    <!--CUC account field-->
+                    <div class="form-group">
+                        {{ form_label(form.cucAccount,'Cuenta en CUC', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.cucAccount) }}
+                            {{ form_widget(form.cucAccount) }}
+                        </div>
+                    </div>
+
+                    <!--CUP account field-->
+                    <div class="form-group">
+                        {{ form_label(form.cupAccount,'Cuenta en CUP', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.cupAccount) }}
+                            {{ form_widget(form.cupAccount) }}
+                        </div>
+                    </div>
+
+                    <!-- social Object field-->
+                    <div class="form-group">
+                        {{ form_label(form.socialObject,'Objeto social', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.socialObject) }}
+                            {{ form_widget(form.socialObject) }}
+                        </div>
+                    </div>
+
+                    <!-- Licence field-->
+                    <div class="form-group">
+                        {{ form_label(form.licence,'No. Licencia', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.licence) }}
+                            {{ form_widget(form.licence) }}
+                        </div>
+                    </div>
+
+                    <label class="col-sm-5"style="margin-right: 13px"></label>
+                    <div class="form-group" style="margin-top: 6px; margin-left: 10px; padding-left: 10px">
+                        <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+                        <a href="{{ path('tcp_index') }}" class="btn btn-default">Regresar al listado</a>
+                    </div>
+
+                </div><!--/. form-horizontal-->
+            </div><!--End .col-md-5-->
+
+            <div class="col-md-3">
+                <div class="form-horizontal">
+                    <h3 class="page-header" style="margin-top: 10px">Emails</h3>
+                    <ul class="emails" data-prototype="{{ form_widget(form.emails.vars.prototype.email)|e }}">
+                        {#iterate over each existing email and render its only field: name#}
+                        {% for email in form.emails %}
+                            <li>
+                                <div class="form-group">
+                                    {{ form_widget(email.email) }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div><!--/. form-horizontal-->
+            </div><!--End .col-md-3-->
+
+            <div class="col-md-3">
+                <div class="form-horizontal">
+                    <h3 class="page-header" style="margin-top: 10px">Telefonos</h3>
+                    <ul class="phones" data-prototype="{{ form_widget(form.phones.vars.prototype.phoneNumber)|e }}">
+                        {% for phone in form.phones %}
+                            <li>{{ form_widget(phone.phoneNumber) }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {{ form_end(form) }}
+        </div>
+    </div><!--end .container-fluid-->
+
+{% endblock %}

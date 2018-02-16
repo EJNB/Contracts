@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Supplement</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ supplement.id }}</td>
+            </tr>
+            <tr>
+                <th>Consecutivenumber</th>
+                <td>{{ supplement.consecutiveNumber }}</td>
+            </tr>
+            <tr>
+                <th>Contractualobject</th>
+                <td>{{ supplement.contractualObject }}</td>
+            </tr>
+            <tr>
+                <th>Cucvalue</th>
+                <td>{{ supplement.cucValue }}</td>
+            </tr>
+            <tr>
+                <th>Cupvalue</th>
+                <td>{{ supplement.cupValue }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('supplement_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('supplement_edit', { 'id': supplement.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

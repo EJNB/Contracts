@@ -1,0 +1,91 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Contractos Expirados
+        <form class="navbar-form navbar-right" action="{{ path('contract_expired_index') }}" method="GET">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Buscar" style="margin-bottom: 20px" name="filter">
+            </div>
+            <button type="submit" class="btn btn-success"  style="margin-bottom: 20px">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </form>
+    </h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="count">
+                <h4>Total de contratos:
+                    <span class="badge bg-light-blue" style="display: inline;">
+                        {{ pagination.getTotalItemCount }}
+                    </span>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <table class="table table-responsive table-condensed">
+        <thead>
+        <tr>
+            <th>No. Consecutivo</th>
+            <th>{% include 'layouts/include/order.html.twig' with {name:'Proveedor', column: 's.name'} %}</th>
+            <th>No. de contrato</th>
+            <th>{% include 'layouts/include/order.html.twig' with {name:'Fecha Incial', column: 'c.startDate'} %}</th>
+            <th>{% include 'layouts/include/order.html.twig' with {name:'Fecha Final', column: 'c.expirationDate'} %}</th>
+            <th style="width: 20%">Objeto contractual</th>
+            <th>{% include 'layouts/include/order.html.twig' with {name:'Tipo de contrato', column: 'c.type'} %}</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contract in pagination %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ contract.suplier.name }}</td>
+                <td>{{ contract.contractNumber }}</td>
+                <td>{% if contract.startDate %}{{ contract.startDate|date('d-m-Y') }}{% endif %}</td>
+                <td>
+                    {% if contract.expirationDate < date('now') %}
+                        <span class="label label-danger">
+                        {{ contract.expirationDate|date('d-m-Y') }}
+                    </span>
+                    {% else %}
+                        <span class="label label-success">
+                        {{ contract.expirationDate|date('d-m-Y') }}
+                    </span>
+                    {% endif %}
+                </td>
+                <td>{{ contract.contractualObject | slice(0,30) }} ...........</td>
+                <td>{{ contract.type }}</td>
+                <td>
+                    <a href="{{ path('contract_show', { 'id': contract.id }) }}" target="_blank" class="link-tooltip" data-placement="top" title="Detalles">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                    {#<a href="" class="link-tooltip" data-placement="top" title="Enviar">#}
+                    {#<span class="glyphicon glyphicon-send"></span>#}
+                    {#</a>#}
+                    {#{% if is_granted('ROLE_ADMIN') %}#}
+                    <a href="{{ path('contract_edit', { 'id': contract.id }) }}" class="link-tooltip" data-placement="top" title="Editar">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="javascript:void(0)"
+                       class="link-tooltip link-eliminar"
+                       description="{{ contract.contractNumber }} con el proveedor: {{ contract.suplier }}"
+                       data-url="{{ path('contract_delete',{ 'id':contract.id }) }}"
+                       data-toggle="modal"
+                       data-target="#modal_delete"
+                       data-placement="top"
+                       title="Eliminar"
+                    >
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                    {#{% endif %}#}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ include('layouts/include/modals.html.twig') }}
+{% endblock %}

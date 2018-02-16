@@ -1,0 +1,92 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Supplier
+ *
+ * @ORM\Table(name="supplier")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SupplierRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"ee" = "EE", "tcp" = "TCP", "cna" = "CNA"})
+ */
+abstract class Supplier
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
+     */
+    protected $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $cucAccount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $cupAccount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $usdAccount;
+
+//    /**
+//     * One Product has Many Features.
+//     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Account", mappedBy="supplier", cascade={"persist"})
+//     */
+//    private $accounts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Email", mappedBy="supplier", cascade={"persist"})
+     **/
+    private $emails;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="supplier", cascade={"persist"})
+     **/
+    private $phones;
+
+    /**
+     * One Supplier has Many Contracts.
+     * @ORM\OneToMany(targetEntity="Contract", mappedBy="suplier")
+     */
+    private $contracts;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->emails = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->phones = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+}

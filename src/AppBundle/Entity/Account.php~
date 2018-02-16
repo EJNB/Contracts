@@ -1,0 +1,126 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Account
+ *
+ * @ORM\Table(name="account")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AccountRepository")
+ */
+class Account
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('USD','CUC','CUP')", length=50)
+     */
+    private $type;
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Supplier", inversedBy="accounts")
+     * @ORM\JoinColumn(name="supplier_id", referencedColumnName="id")
+     */
+    private $supplier;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="acoount", type="string", length=255)
+     */
+    private $acoount;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Account
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set acoount
+     *
+     * @param string $acoount
+     *
+     * @return Account
+     */
+    public function setAcoount($acoount)
+    {
+        $this->acoount = $acoount;
+
+        return $this;
+    }
+
+    /**
+     * Get acoount
+     *
+     * @return string
+     */
+    public function getAcoount()
+    {
+        return $this->acoount;
+    }
+
+    /**
+     * Set supplier
+     *
+     * @param \AppBundle\Entity\Supplier $supplier
+     *
+     * @return Account
+     */
+    public function setSupplier(\AppBundle\Entity\Supplier $supplier = null)
+    {
+        $this->supplier = $supplier;
+
+        return $this;
+    }
+
+    /**
+     * Get supplier
+     *
+     * @return \AppBundle\Entity\Supplier
+     */
+    public function getSupplier()
+    {
+        return $this->supplier;
+    }
+}

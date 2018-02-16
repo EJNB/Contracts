@@ -1,0 +1,96 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-sm-5">
+            <h1 class="page-header">Suplementos
+                <form class="navbar-form navbar-right" action="{{ path('supplement_index') }}" method="get">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar" style="margin-bottom: 20px" name="filter">
+                    </div>
+                    <button type="submit" class="btn btn-success"  style="margin-bottom: 20px">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{{ path('supplement_new') }}" class="btn btn-primary">Introducir suplemento</a>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3">
+            <div class="{#pull-left#}" style="margin-left: 50px">
+            <div class="count">
+                <h4>Total de suplementos:
+                    <span class="badge bg-light-blue" style="display: inline;">
+                        {{ pagination.getTotalItemCount }}
+                    </span>
+                </h4>
+            </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <table class="table table-responsive table-condensed table-hover">
+        <thead>
+            <tr>
+                <th style="width: 10%">ID</th>
+                <th style="width: 7%">Proveedor</th>
+                <th style="width: 20%">Contrato</th>
+                <th style="width: 7%">No. Cons</th>
+                <th style="width: 20%">Objeto contractual</th>
+                <th style="width: 7%">Valor CUC</th>
+                <th style="width: 7%">Valor CUP</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for supplement in pagination %}
+            <tr>
+                <td>{{ supplement.idSupplement }}</td>
+                <td>{{ supplement.contract.suplier }}</td>
+                <td> <span data-toggle="tooltip" data-placement="bottom" title="{{ supplement.contract.contractNumber }}">{{ supplement.contract }}</span> {#{{ supplement.contract.contractNumber }}#} </td>
+                <td>{{ supplement.consecutiveNumber }}</td>
+                <td>{{ supplement.contractualObject }}</td>
+                <td>{{ supplement.cucValue }}</td>
+                <td>{{ supplement.cupValue }}</td>
+                <td>
+                    <a href="{{ path('supplement_show', { 'id': supplement.id }) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Detalles">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                    {#<a href="" data-toggle="tooltip" data-placement="top" title="Detalles">#}
+                        {#<span class="glyphicon glyphicon-send"></span>#}
+                    {#</a>#}
+                    <a href="{{ path('supplement_edit', { 'id': supplement.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="javascript:void(0)"
+                       class="link-tooltip link-eliminar"
+                       data-descripcion="
+                            ¿Está seguro de eliminar el supplemento: {{ supplement.idSupplement }}?
+                        "
+                       data-url="{{ path('supplement_delete',{ 'id':supplement.id }) }}"
+                       data-toggle="modal"
+                       data-target="#modal_delete"
+                       data-placement="top"
+                       title="Eliminar"
+                    >
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    {#<a href="{{ path('supplement_new') }}" class="btn btn-primary">Agregar</a>#}
+
+    {{ include('layouts/include/modals.html.twig') }}
+{% endblock %}

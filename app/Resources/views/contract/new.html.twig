@@ -1,0 +1,210 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Nuevo contrato</h1>
+    <div class="container-fluid">
+        <div class="row">
+            {{ form_start(form) }}
+
+            <div class="col-md-5">
+                <div class="form-horizontal">
+
+                    <!--consecutive number field-->
+                    <div class="form-group">
+                        {{ form_label(form.suplier,'Proveedor:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-6">
+                            {{ form_errors(form.suplier) }}
+                            {{ form_widget(form.suplier) }}
+                        </div>
+                    </div>
+
+                    <!--consecutive number field-->
+                    <div class="form-group">
+                        {{ form_label(form.department,'Departamento:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-6">
+                            {{ form_errors(form.department) }}
+                            {{ form_widget(form.department) }}
+                        </div>
+                    </div>
+
+                    <!--contract number field-->
+                    <div class="form-group">
+                        {{ form_label(form.contractNumber,'No. Contrato:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.contractNumber) }}
+                            {{ form_widget(form.contractNumber) }}
+                        </div>
+                    </div>
+
+                    {#<!--consecutive number field-->#}
+                    {#<div class="form-group">#}
+                        {#{{ form_label(form.consecutiveNumber,'No. Consecutivo:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}#}
+                        {#<div class="col-sm-7">#}
+                            {#{{ form_errors(form.consecutiveNumber) }}#}
+                            {#{{ form_widget(form.consecutiveNumber) }}#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    <!--starDate number field-->
+                    <div class="form-group">
+                        {{ form_label(form.startDate,'Fecha inicio:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-5">
+                            {{ form_errors(form.startDate) }}
+                            {{ form_widget(form.startDate) }}
+                        </div>
+                    </div>
+
+                    <!--expiredDate number field-->
+                    <div class="form-group">
+                        {{ form_label(form.expirationDate,'Fecha final:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-5">
+                            {{ form_errors(form.expirationDate) }}
+                            {{ form_widget(form.expirationDate) }}
+                        </div>
+                    </div>
+
+                    <!--cuc value number field-->
+                    <div class="form-group">
+                        {{ form_label(form.cucValue,'Valor en cuc:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                {{ form_widget(form.cucValue) }}
+                                {{ form_errors(form.cucValue) }}
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--cuc value number field-->
+                    <div class="form-group">
+                        {{ form_label(form.cupValue,'Valor en cup:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                {{ form_widget(form.cupValue) }}
+                                {{ form_errors(form.cupValue) }}
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--monto total field-->
+                    <div class="form-group">
+                        {{ form_label(form.totalAmount,'Moneda total:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                {{ form_widget(form.totalAmount) }}
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                            {{ form_errors(form.totalAmount) }}
+                        </div>
+                    </div>
+
+                    {#<!--scope number field-->#}
+                    {#<div class="form-group">#}
+                        {#{{ form_label(form.cucScope,'Alcance en CUC:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}#}
+                        {#<div class="col-sm-6">#}
+                            {#<div class="input-group">#}
+                                {#<span class="input-group-addon">$</span>#}
+                                {#{{ form_errors(form.cucScope) }}#}
+                                {#{{ form_widget(form.cucScope) }}#}
+                                {#<span class="input-group-addon">.00</span>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    {#<!--scope number field-->#}
+                    {#<div class="form-group">#}
+                        {#{{ form_label(form.cupScope,'Alcance en CUP:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}#}
+                        {#<div class="col-sm-6">#}
+                            {#<div class="input-group">#}
+                                {#<span class="input-group-addon">$</span>#}
+                                {#{{ form_errors(form.cupScope) }}#}
+                                {#{{ form_widget(form.cupScope) }}#}
+                                {#<span class="input-group-addon">.00</span>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                </div><!--/. form-horizontal-->
+            </div><!--End .col-md-5-->
+
+            <div class="col-md-5">
+                <div class="form-horizontal">
+
+                    <!--type number field-->
+                    <div class="form-group">
+                        {{ form_label(form.type,'Tipo de contrato:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-6">
+                            {{ form_errors(form.type) }}
+                            {{ form_widget(form.type) }}
+                        </div>
+                    </div>
+
+                    <!--contractual object number field-->
+                    <div class="form-group">
+                        {{ form_label(form.contractualObject,'Objeto contractual:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.contractualObject) }}
+                            {{ form_widget(form.contractualObject) }}
+                        </div>
+                    </div>
+
+                    <!--No. acuerdo UASI object number field-->
+                    <div class="form-group">
+                        {{ form_label(form.agreementNoUASI,'No. de acuerdo UASI:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-3">
+                            {{ form_errors(form.agreementNoUASI) }}
+                            {{ form_widget(form.agreementNoUASI) }}
+                        </div>
+                        <div class="col-sm-3">
+                            {{ form_widget(form.agreementDateUASI) }}
+                        </div>
+                    </div>
+
+                    <!--No. acuerdo Cubanacan object number field-->
+                    <div class="form-group">
+                        {{ form_label(form.agreementNoCUBANACAN,'No. de acuerdo Cubanacan:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-3">
+                            {{ form_errors(form.agreementNoCUBANACAN) }}
+                            {{ form_widget(form.agreementNoCUBANACAN) }}
+                        </div>
+                        <div class="col-sm-3">
+                            {{ form_widget(form.agreementDateCC) }}
+                        </div>
+                    </div>
+
+                    {#<!--No. acuerdo Cubanacan object number field-->#}
+                    {#<div class="form-group">#}
+                        {#{{ form_label(form.pdfContract,'', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}#}
+                        {#<div class="col-sm-5">#}
+                            {#{{ form_errors(form.pdfContract) }}#}
+                            {#{{ form_widget(form.pdfContract) }}#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    {#<!--Aprobado en el comite de contratacion-->#}
+                    {#<div class="form-group">#}
+                        {#{{ form_label(form.confirmed,'', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}#}
+                        {#<div class="col-sm-5">#}
+                            {#{{ form_errors(form.confirmed) }}#}
+                            {#{{ form_widget(form.confirmed) }}#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    <!--No. acuerdo Cubanacan object number field-->
+                    <div class="form-group">
+                        <label class="col-sm-5"></label>
+                        <div class="col-sm-7">
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                            <a href="{{ path('contract_index') }}" class="btn btn-default">Regresar al listado</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div><!--end .container-fluid-->
+{% endblock %}

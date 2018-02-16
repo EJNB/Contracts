@@ -1,0 +1,77 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Agregar suplemento</h1>
+
+    <div class="container-fluid">
+        <div class="row">
+            {{ form_start(form) }}
+
+            <div class="col-md-5">
+                <div class="form-horizontal">
+
+                    <!--contract field-->
+                    <div class="form-group">
+                        {{ form_label(form.contract,'Contrato', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.contract) }}
+                            {{ form_widget(form.contract) }}
+                        </div>
+                    </div>
+
+                    <!--consecutive field-->
+                    <div class="form-group">
+                        {{ form_label(form.consecutiveNumber,'No. Consecutivo', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.consecutiveNumber) }}
+                            {{ form_widget(form.consecutiveNumber) }}
+                        </div>
+                    </div>
+
+                    <!-- field-->
+                    <div class="form-group">
+                        {{ form_label(form.contractualObject,'Objeto contractual', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(form.contractualObject) }}
+                            {{ form_widget(form.contractualObject) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.cucValue,'Valor en cuc:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                {{ form_widget(form.cucValue) }}
+                                {{ form_errors(form.cucValue) }}
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.cupValue,'Valor en cup:', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                {{ form_widget(form.cupValue) }}
+                                {{ form_errors(form.cupValue) }}
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label"></label>
+                        <div class="col-sm-7">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                            <a href="{{ path('supplement_index') }}" class="btn btn-default">Regresar al listado</a>
+                        </div>
+                    </div>
+                </div><!--/. form-horizontal-->
+            </div><!--End .col-md-5-->
+            {{ form_end(form) }}
+        </div>
+    </div><!--end .container-fluid-->
+
+{% endblock %}

@@ -1,0 +1,148 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User111: javier
+ * Date: 07/12/2017
+ * Time: 7:35
+ */
+
+namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * TCP
+ *
+ * @ORM\Table(name="tcp")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TCPRepository")
+ */
+class TCP extends Supplier
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="bigint", length=11, unique=true)
+     */
+    protected $ci;
+
+    /**
+     * Many tcps have Many licences.s
+     * @ORM\ManyToMany(targetEntity="Licence", inversedBy="tcps")
+     * @ORM\JoinTable(name="tcps_licences")
+     */
+    private $licences;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="social_object", type="string")
+     */
+    protected $socialObject;
+
+    /**
+     * @var integer
+     *
+     * @Assert\Valid()
+     */
+    private $licence;
+
+    /**
+     * Set ci
+     *
+     * @param integer $ci
+     *
+     * @return TCP
+     */
+    public function setCi($ci)
+    {
+        $this->ci = $ci;
+
+        return $this;
+    }
+
+    /**
+     * Get ci
+     *
+     * @return integer
+     */
+    public function getCi()
+    {
+        return $this->ci;
+    }
+
+    /**
+     * Add licence
+     *
+     * @param \AppBundle\Entity\Licence $licence
+     *
+     * @return TCP
+     */
+    public function addLicence(\AppBundle\Entity\Licence $licence)
+    {
+        $this->licences[] = $licence;
+
+        return $this;
+    }
+
+    /**
+     * Remove licence
+     *
+     * @param \AppBundle\Entity\Licence $licence
+     */
+    public function removeLicence(\AppBundle\Entity\Licence $licence)
+    {
+        $this->licences->removeElement($licence);
+    }
+
+    /**
+     * Get licences
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLicences()
+    {
+        return $this->licences;
+    }
+
+    /*
+     * esto es para setear una primera licencia en el formulario de new tcp
+     */
+    public function setLicence(Licence $licence = null)
+    {
+        $this->$licence = $licence;
+    }
+
+    public function getLicence()
+    {
+        return $this->licence;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * Set socialObject
+     *
+     * @param string $socialObject
+     *
+     * @return TCP
+     */
+    public function setSocialObject($socialObject)
+    {
+        $this->socialObject = $socialObject;
+
+        return $this;
+    }
+
+    /**
+     * Get socialObject
+     *
+     * @return string
+     */
+    public function getSocialObject()
+    {
+        return $this->socialObject;
+    }
+}

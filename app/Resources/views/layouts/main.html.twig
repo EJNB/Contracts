@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('plugins/bootstrap-select-1.12.0/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="{{ asset('plugins/datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}">
+    <link href="{{ asset('plugins/PNotify/pnotify.custom.min.css') }}" rel="stylesheet"  media="all" type="text/css">
+    <link href="{{ asset('plugins/icheck/skins/square/_all.css') }}" rel="stylesheet"  media="all" type="text/css">
+    <link href="{{ asset('custom/styles.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block body %}
+    {{ include('layouts/include/flash-message.html.twig') }}
+    {{ include('layouts/header.html.twig') }}
+    <div class="container-fluid">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    <footer>
+        {{ include('layouts/footer.html.twig') }}
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('jQuery/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/moment/min/moment.min.js') }}"></script>
+    <script src="{{ asset('plugins/moment/min/locales.min.js') }}"></script>
+    <script src="{{ asset('plugins/datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap-select-1.12.0/dist/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('plugins/PNotify/pnotify.custom.min.js') }}"></script>
+    <script src="{{ asset('plugins/icheck/icheck.min.js') }}"></script>
+    <script src="{{ asset('custom/script.js') }}"></script>
+{% endblock %}

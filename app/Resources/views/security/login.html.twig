@@ -1,0 +1,38 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block body %}
+    <img src="{{ asset('img/contratos.png') }}" style="opacity: 1; position: absolute;" {#height="100%"#} width="100%">
+
+    <div class="row" style="top: 30%; opacity: 1">
+        <div class="col-md-4 col-sm-4 col-xs-2"></div>
+        <div class="col-md-3 col-sm-4 col-xs-8" style="padding-top: 250px">
+            {% if error %}
+                <div class="alert alert-danger">
+                    Error en sus credenciales
+                    {#{{ error.messageKey|trans(error.messageData, 'security') }}#}
+                </div>
+            {% endif %}
+
+            <form action="{{ path('login') }}" method="post">
+                <div class="form-group">
+                    {#<label for="username">Usuario:</label>#}
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required placeholder="Usuario"/>
+                </div>
+
+                <div class="form-group">
+                    {#<label for="password">Contraseña:</label>#}
+                    <input type="password" id="password" name="_password" required  class='form-control' placeholder="Contraseña"/>
+
+                </div>
+                {#
+                    If you want to control the URL the user
+                    is redirected to on success (more details below)
+                    <input type="hidden" name="_target_path" value="/account" />
+                #}
+
+                <button type="submit" class="btn btn-success" style="position: relative; left: 40%">Aceptar</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

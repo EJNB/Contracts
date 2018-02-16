@@ -1,0 +1,5 @@
+para segunda version:
+1. 
+
+a la hora de montar el sistema teneren cuenta q:
+1. poner el lado de la relacion de supplements y contracts la llave foranea como cascade

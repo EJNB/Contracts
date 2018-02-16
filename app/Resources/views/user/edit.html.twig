@@ -1,0 +1,94 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Editar usuario</h1>
+
+    <div class="container-fluid">
+        <div class="row">
+            {{ form_start(edit_form) }}
+
+            <div class="col-md-5">
+                <div class="form-horizontal">
+
+                    <!--Name field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.name,'Nombre', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.name) }}
+                            {{ form_widget(edit_form.name) }}
+                        </div>
+                    </div>
+
+                    <!--email field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.email,'Correo', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.email) }}
+                            {{ form_widget(edit_form.email) }}
+                        </div>
+                    </div>
+
+                    <!--username field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.username,'Usuario', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.username) }}
+                            {{ form_widget(edit_form.username) }}
+                        </div>
+                    </div>
+
+                    <!--department field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.department,'Departamento', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.department) }}
+                            {{ form_widget(edit_form.department) }}
+                        </div>
+                    </div>
+
+                    <!--ocupation field-->
+                    <div class="form-group">
+                        {{ form_label(edit_form.occupation,'Cargo', { 'label_attr':{ 'class':'col-sm-5 control-label' } }) }}
+                        <div class="col-sm-7">
+                            {{ form_errors(edit_form.occupation) }}
+                            {{ form_widget(edit_form.occupation) }}
+                        </div>
+                    </div>
+                </div><!--end .form-horizontal-->
+            </div><!--end .col-md-5-->
+
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="acuerdos_seguridadbundle_user[isActive]" {#class="col-sm-5 control-label"#}>Activo</label>
+                    <div class="switch {#col-sm-7#}">
+                        {{ form_widget(edit_form.isActive) }}
+                        {{ form_label(edit_form.isActive) }}
+                    </div>
+                    {{ form_errors(edit_form.isActive) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(edit_form.roles) }}
+                    {{ form_errors(edit_form.roles) }}
+                    {{ form_widget(edit_form.roles) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="margin-left: 8px" ></label>
+                        <div class="col-sm-5">
+                            <input type="submit" value="Guardar" class="btn btn-primary"/>
+                            <a href="{{ path('user_index') }}" class="btn btn-default">Regresar al listado</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(edit_form) }}
+        </div><!--end .row-->
+
+    </div><!--end .container-fluid-->
+
+{% endblock %}

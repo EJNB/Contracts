@@ -1,0 +1,106 @@
+{% for label, messages in app.flashes %}
+    <script src="{{ asset('jQuery/jquery-1.11.1.min.js') }}"></script>
+    {% for message in messages %}
+        {% if label=='notice' %}
+            <script>
+                $(document).ready(function(){
+                    $(function(){
+                        new PNotify({
+                            title: '!Exito',
+                            type : 'success',
+                            text: '{{ message }}'
+                        });
+                    });
+                });
+            </script>
+        {% elseif label=='warning' %}
+            <script>
+                $(document).ready(function(){
+                    $(function(){
+                        new PNotify({
+                            title: '!Atención',
+                            type : 'warning',
+                            text: '{{ message }}'
+                        });
+                    });
+                });
+            </script>
+        {% else %}
+            <script>
+                $(document).ready(function(){
+                    $(function(){
+                        new PNotify({
+                            title: '!Error',
+                            type : 'error',
+                            text: '{{ message }}'
+                        });
+                    });
+                })
+            </script>
+        {% endif %}
+        {#<div class="flash-{{ label }}">#}
+            {#{{ message }}#}
+        {#</div>#}
+    {% endfor %}
+{% endfor %}
+
+
+{#{% for flashMessage in app.session.flashbag.get('notice') %}#}
+    {#<div class="ui-pnotify" >#}
+        {#<div class="alert alert-success alert-dismissible fade in">#}
+            {#<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>#}
+            {#<span class="glyphicon glyphicon-info-sign"></span>{{ flashMessage }}#}
+        {#</div>#}
+    {#</div>#}
+{#{% endfor %}#}
+
+{#{% for flashMessage in app.session.flashbag.get('error') %}#}
+    {#<div class="ui-pnotify" >#}
+        {#<div class="alert alert-danger alert-dismissible fade in">#}
+            {#<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>#}
+            {#<span class="glyphicon glyphicon-info-sign"></span>{{ flashMessage }}#}
+        {#</div>#}
+    {#</div>#}
+{#{% endfor %}#}
+{#{% for type, flash_messages in app.session.flashBag.all %}#}
+    {#<script src="{{ asset('jQuery/jquery-1.11.1.min.js') }}"></script>#}
+    {#{% for flash_message in flash_messages %}#}
+        {#{% if type=='notice' %}#}
+            {#<script>#}
+                {#$(document).ready(function(){#}
+                    {#$(function(){#}
+                        {#new PNotify({#}
+                            {#title: '!Exito',#}
+                            {#type : 'success',#}
+                            {#text: '{{ flash_message }}'#}
+                        {#});#}
+                    {#});#}
+                {#});#}
+            {#</script>#}
+        {#{% elseif type=='warning' %}#}
+            {#<script>#}
+                {#$(document).ready(function(){#}
+                    {#$(function(){#}
+                        {#new PNotify({#}
+                            {#title: '!Atención',#}
+                            {#type : 'warning',#}
+                            {#text: '{{ flash_message }}'#}
+                        {#});#}
+                    {#});#}
+                {#});#}
+            {#</script>#}
+        {#{% else %}#}
+            {#<script>#}
+                {#$(document).ready(function(){#}
+                    {#$(function(){#}
+                        {#new PNotify({#}
+                            {#title: '!Error',#}
+                            {#type : 'error',#}
+                            {#text: '{{ flash_message }}'#}
+                        {#});#}
+                    {#});#}
+                {#})#}
+            {#</script>#}
+        {#{% endif %}#}
+    {#{% endfor %}#}
+{#{% endfor %}#}

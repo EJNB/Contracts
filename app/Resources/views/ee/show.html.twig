@@ -1,0 +1,72 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Entidad estatal <small style="display: inline">{{ eE.name }}</small></h1>
+
+    <table class="table table-responsive">
+        <tbody>
+
+        <tr>
+            <th style="width: 20%">Nombre</th>
+            <td>{{ eE.name }}</td>
+        </tr>
+        <tr>
+            <th>Direcci&oacute;n</th>
+            <td>{{ eE.address }}</td>
+        </tr>
+        <tr>
+            <th>Cuenta en CUP</th>
+            <td>{{ eE.cupAccount }}</td>
+        </tr>
+        <tr>
+            <th>Cuenta en CUC</th>
+            <td>{{ eE.cucAccount }}</td>
+        </tr>
+        <tr>
+            <th>Cuenta en USD</th>
+            <td>{{ eE.usdAccount }}</td>
+        </tr>
+        <tr>
+            <th>Codigo ReEUP</th>
+            <td>{{ eE.codReuup }}</td>
+        </tr>
+        <tr>
+            <th>Codigo NIT</th>
+            <td>{{ eE.codNit }}</td>
+        </tr>
+
+        <tr>
+            <th>Correos</th>
+            <td>
+                {% for email in eE.emails %}
+                    {{  email.email }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+
+        <tr>
+            <th>Telefonos</th>
+            <td>
+                {% for t in eE.phones   %}
+                    {{  t.phoneNumber }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ee_index') }}" class="btn btn-default">Regresar al listado</a>
+    <a href="{{ path('ee_edit', { 'id': eE.id }) }}" class="btn btn-warning">Editar</a>
+    <a
+        href="javascript:void(0);"
+        class="btn btn-danger link-eliminar"
+        data-toggle="modal"
+        data-target="#modal_delete"
+        description="{{ eE.name }}"
+        data-url="{{ path('ee_delete', { 'id' : eE.id }) }}"
+    >
+        Eliminar
+    </a>
+
+    {{ include('layouts/include/modals.html.twig') }}
+{% endblock %}

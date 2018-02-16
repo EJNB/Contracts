@@ -1,0 +1,4 @@
+{% if pagination.isSorted(column) %}
+    <span class="glyphicon glyphicon-arrow-{{ pagination.direction|replace({'asc':'up','desc':'down'}) }}"></span>
+{% endif %}
+{{ knp_pagination_sortable(pagination, name, column) }}

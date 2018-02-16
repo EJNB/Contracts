@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cna</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cNA.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ cNA.name }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ cNA.address }}</td>
+            </tr>
+            <tr>
+                <th>Cucaccount</th>
+                <td>{{ cNA.cucAccount }}</td>
+            </tr>
+            <tr>
+                <th>Cupaccount</th>
+                <td>{{ cNA.cupAccount }}</td>
+            </tr>
+            <tr>
+                <th>Socialobject</th>
+                <td>{{ cNA.socialObject }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cna_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('cna_edit', { 'id': cNA.id }) }}">Edit</a>
+        </li>
+        {#<li>#}
+            {#{{ form_start(delete_form) }}#}
+                {#<input type="submit" value="Delete">#}
+            {#{{ form_end(delete_form) }}#}
+        {#</li>#}
+    </ul>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Cooperativas no agropecuarias
+        <form class="navbar-form navbar-right" action="{{ path('cna_index') }}">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Buscar" style="margin-bottom: 20px" name="filter">
+            </div>
+            <button type="submit" class="btn btn-success"  style="margin-bottom: 20px"><span class="glyphicon glyphicon-search"></span></button>
+        </form>
+    </h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-left">
+                <a href="{{ path('cna_new') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Insertar CNA</a>
+            </div>
+
+            <div class="pull-right" style="margin-right: 5%">
+                <div class="count">
+                    <h4>Total de registros: <span class="badge bg-green" style="display: inline;"> {{ pagination.getTotalItemCount }}</span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <table class="table table-responsive table-condensed">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>{% include 'layouts/include/order.html.twig' with {name:'Nombre', column: 'c.name'} %}</th>
+            <th>Direcci&oacute;n</th>
+            <th>{% include 'layouts/include/order.html.twig' with {name:'Objeto social', column: 'c.socialObject'} %}</th>
+            <th>Cuenta en cuc</th>
+            <th>Cuenta en cup</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cNA in pagination %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ cNA.name }}</td>
+                <td>{{ cNA.address }}</td>
+                <td>{{ cNA.socialObject }}</td>
+                <td>{{ cNA.cucAccount }}</td>
+                <td>{{ cNA.cupAccount }}</td>
+                <td>
+                    <a href="{{ path('cna_show', { 'id': cNA.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalles">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                    <a href="{{ path('cna_edit', { 'id': cNA.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="javascript:void(0)"
+                       class="link-tooltip link-eliminar"
+                       description="{{ cNA.name }}"
+                       data-url="{{ path('cna_delete', { 'id' : cNA.id }) }}"
+                       data-toggle="modal"
+                       data-target="#modal_delete"
+                       data-placement="top"
+                       title="Eliminar"
+                    >
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+    {{ include('layouts/include/modals.html.twig') }}
+{% endblock %}

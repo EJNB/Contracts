@@ -1,0 +1,54 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Departmentos</h1>
+
+    <table class="table table-responsive table-condensed table-hover">
+        <thead >
+            <tr>
+                <th style="width: 20%">Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for department in departments %}
+            <tr>
+                <td>{{ department.name }}</td>
+                <td>
+                    <a href="{{ path('department_edit', { 'id': department.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="javascript:void(0)"
+                       class="link-tooltip link-eliminar"
+                       data-descripcion="¿Está seguro de eliminar el departamento seleccionado?"
+                       data-url="{{ path('department_delete',{ 'id':department.id }) }}"
+                       data-toggle="modal"
+                       data-target="#modal_delete"
+                       data-placement="top"
+                       title="Eliminar"
+                    >
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        {{ form_start(form) }}
+        <tr>
+            <td>
+                <div class="form-group">
+                    {{ form_errors(form.name) }}
+                    {{ form_widget(form.name) }}
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Guardar">
+                </div>
+            </td>
+        </tr>
+        {{ form_end(form) }}
+        </tbody>
+    </table>
+    {{ include('layouts/include/modals.html.twig') }}
+
+{% endblock %}

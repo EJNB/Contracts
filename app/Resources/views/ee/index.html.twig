@@ -1,0 +1,93 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Entidades Estatales
+
+        <form class="navbar-form navbar-right" action="{{ path('ee_index') }}" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Buscar" style="margin-bottom: 20px" name="filter">
+            </div>
+            <button type="submit" class="btn btn-success"  style="margin-bottom: 20px">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </form>
+    </h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-left">
+                <a href="{{ path('ee_new') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Insertar Entidad Estatal</a>
+            </div>
+
+            <div class="pull-right" style="margin-right: 5%">
+                <div class="count">
+                    <h4>Total de registros: <span class="badge bg-green" style="display: inline;"> {{ pagination.getTotalItemCount }}</span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <table class="table table-responsive table-condensed">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>{% include 'layouts/include/order.html.twig' with {name:'Nombre', column: 'e.name'} %}</th>
+                <th>{% include 'layouts/include/order.html.twig' with {name:'Dirección', column: 'e.address'} %}</th>
+                {#<th>Objeto social</th>#}
+                {#<th>Cuenta en cuc</th>#}
+                {#<th>Cuenta en cup</th>#}
+                <th>Cod. REEUP</th>
+                <th>Cod. NIT</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for eE in pagination %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ eE.name }}</td>
+                <td>{{ eE.address }}</td>
+                {#<td>{{ eE.codReuup }}</td>#}
+                {#<td>{{ eE.codNit }}</td>#}
+                {#<td>{{ eE.socialObject }}</td>#}
+
+                {#<td>{{ eE.supplier }}</td>#}
+                {#<td>{{ eE.cupAccount }}</td>#}
+                <td>{{ eE.codReuup }}</td>
+                <td>{{ eE.codNit }}</td>
+                <td>
+                    <a href="{{ path('ee_show', { 'id': eE.id }) }}" data-placement="top" title="Detalles" class="link-tooltip">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                    <a href="{{ path('ee_edit', { 'id': eE.id }) }}" data-placement="top" title="Editar" class="link-tooltip">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="javascript:void(0);"
+                       class="link-tooltip link-eliminar"
+                       description="{{ eE.name }}"
+                       data-url="{{ path('ee_delete', { 'id' : eE.id }) }}"
+                       data-toggle="modal"
+                       data-target="#modal_delete"
+                       data-placement="top"
+                       title="Eliminar"
+                    >
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+    {{ include('layouts/include/modals.html.twig') }}
+{% endblock %}

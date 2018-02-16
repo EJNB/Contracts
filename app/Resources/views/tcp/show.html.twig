@@ -1,0 +1,65 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">TCP <small style="display: inline">{{ tCP.name }}</small></h1>
+
+    <table class="table table-responsive table-condensed">
+        <tbody>
+            <tr>
+                <th style="width: 20%">Carnet de identidad</th>
+                <td>{{ tCP.ci }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ tCP.name }}</td>
+            </tr>
+            <tr>
+                <th>Direcci&oacute;n</th>
+                <td>{{ tCP.address }}</td>
+            </tr>
+            <tr>
+                <th>Cuenta en CUC</th>
+                <td>{{ tCP.cucAccount }}</td>
+            </tr>
+            <tr>
+                <th>Cuenta en CUP</th>
+                <td>{{ tCP.cupAccount }}</td>
+            </tr>
+            <tr>
+                <th>Objeto social</th>
+                <td>{{ tCP.socialObject }}</td>
+            </tr>
+
+            <tr>
+                <th>Correos</th>
+                <td>
+                    {% for email in tCP.emails %}
+                        {{  email.email }}<br>
+                    {% endfor %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>Telefonos</th>
+                <td>
+                    {% for t in tCP.phones   %}
+                        {{  t.phoneNumber }}<br>
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tcp_index') }}" class="btn btn-default">Regresar al listado</a>
+    <a href="{{ path('tcp_edit', { 'id': tCP.id }) }}" class="btn btn-warning">Editar</a>
+    <a
+        href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target="#modal_delete"
+        lass="link-tooltip link-eliminar"
+        description="{{ tCP.name }}"
+        data-url="{{ path('tcp_delete',{ 'id':tCP.id }) }}"
+    >
+        Eliminar
+    </a>
+
+    {{ include('layouts/include/modals.html.twig') }}
+{% endblock %}
